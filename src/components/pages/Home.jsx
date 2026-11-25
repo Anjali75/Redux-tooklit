@@ -12,7 +12,6 @@ export default function Home() {
     .then((res) => res.data)
     .then((finalRes) =>{
       setProduct(finalRes.products)
-      console.log(finalRes.products)
     })
   }
 
@@ -37,8 +36,19 @@ export default function Home() {
 
   function ProductCard({data}) {
     
-      console.log("Product Data:", data);
-  const {title, price, thumbnail, description} = data
+  const {title, price, thumbnail, description, id} = data
+  
+
+  const addToCartItem = ()=>{
+    let cartObj = {
+      title,
+      price,
+      image: thumbnail,
+      quantity: 1,
+      description,
+      id
+    }
+  }
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <div className="h-56 w-full">
@@ -257,12 +267,13 @@ export default function Home() {
           </li>
         </ul>
         <div className="mt-4 flex items-center justify-between gap-4">
-          <p className="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">
+          <p className="text-2xl font-extrabold leading-tight text-gray-900">
             $ {price}
           </p>
           <button
+           onClick = {addToCartItem}
             type="button"
-            className="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            className="inline-flex items-center border-2 rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
           >
             <svg
               className="-ms-2 me-2 h-5 w-5"
