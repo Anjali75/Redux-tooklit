@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { increment } from "../../redux/counterSlice";
 import axios from "axios";
+import { addToCart } from "../../redux/cartSlice";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Home() {
   let dispatch = useDispatch();
@@ -30,6 +32,8 @@ export default function Home() {
         })
       }
       </div>
+
+      <ToastContainer/>
     </section>
   );
 }
@@ -38,7 +42,7 @@ export default function Home() {
     
   const {title, price, thumbnail, description, id} = data
   
-
+    let dispatch = useDispatch()
   const addToCartItem = ()=>{
     let cartObj = {
       title,
@@ -48,6 +52,8 @@ export default function Home() {
       description,
       id
     }
+    dispatch(addToCart({cartObj}))
+    toast.success("item Added in Cart")
   }
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">

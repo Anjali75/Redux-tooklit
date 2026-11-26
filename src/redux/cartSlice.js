@@ -7,7 +7,8 @@ export let cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, reqData) => {
-      state.cart += 1;
+      let { cartObj } = reqData.payload;
+      state.cart = [cartObj, ...state.cart]
     },
     deleteCart: (state) => {
       state.cart -= 1;

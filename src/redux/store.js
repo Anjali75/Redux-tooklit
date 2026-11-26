@@ -6,7 +6,7 @@ export let store = configureStore(
     {
         reducer:{
             counterStore: counterSlice,
-            cartSlice: cartSlice
+            cartStore: cartSlice
         }
     }
 )
